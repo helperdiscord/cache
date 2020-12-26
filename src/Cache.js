@@ -1,9 +1,11 @@
 const { Client } = require('pg-native');
 const Channels = require('./structs/Channels');
+const Guilds = require('./structs/Guilds');
 module.exports = class Cache {
     constructor(url, options) {
         this.pg = new Client({ connectionString: url });
         this.channels = new Channels(this, { cache: options?.cache, rest: options?.rest });
+        this.guilds = new Channels(this, { cache: options?.cache, rest: options?.rest });
     }
     static mergeObjects(objTarget, objSource) {
         for (const [key, value] of Object.entries(objSource)) {
