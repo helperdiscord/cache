@@ -15,6 +15,9 @@ module.exports = class State {
     _size() {
         throw Error('Function "size" is not implemented');
     }
+    _del(){
+        throw Error('Function "del" is not implemented');
+    }
     async get(...args) {
         return this._get({rest: this.rest ? true : false, cache: this.options.cache }, ...args);
     }
@@ -23,6 +26,9 @@ module.exports = class State {
     }
     async update(...args) {
         return this.set(...args);
+    }
+    async del(...args) {
+        return this._del(...args)
     }
     async size() {
         return this._size();
