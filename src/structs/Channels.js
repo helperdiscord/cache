@@ -1,7 +1,14 @@
 const State = require('./bases/State')
 module.exports = class Channels extends State {
-    async _get({ rest, cache }, id) {
-        let c = (await this.client.query(`SELECT * FROM channels WHERE channel_id = $1`, [id]))[0]
+    _get(id) {
+        let c = (this.client.query(`SELECT * FROM channels WHERE channel_id = $1`, [id]))[0]
+        if (c) {
+            return this.client.mergeObjects({ id: c.channel_id, guild_id: c.guild_id }, c.data);
+        }
+        return null;
+    }
+    async _fetch({ rest, cache }, id) {
+        let c = (this.client.query(`SELECT * FROM channels WHERE channel_id = $1`, [id]))[0]
         if (c) {
             return this.client.mergeObjects({ id: c.channel_id, guild_id: c.guild_id }, c.data);
         }
@@ -27,6 +34,7 @@ module.exports = class Channels extends State {
         }
         if (rest) {
             let channel = await this.rest.get(`/channels/${id}`);
+            if(!channel) return false;
             let { guild_id } = channel;
             delete channel.guild_id;
             delete channel.id;
@@ -34,12 +42,12 @@ module.exports = class Channels extends State {
         }
         return null;
     }
-    async _del(id){
+    _del(id) {
         this.client.query(`DELETE FROM channels WHERE channel_id = $1`, [id]);
         return true;
     }
-    async _size() {
-        let amount = (await this.client.query(`SELECT COUNT(*) FROM channels`))[0]?.count;
+    _size() {
+        let amount = (this.client.query(`SELECT COUNT(*) FROM channels`))[0]?.count;
         return amount ?? 0;
     }
 }

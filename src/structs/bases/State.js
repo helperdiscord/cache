@@ -9,6 +9,9 @@ module.exports = class State {
     _get() {
         throw Error('Function "get" is not implemented');
     }
+    _fetch() {
+        throw Error('Function "fetch" is not implemented');
+    }
     _set() {
         throw Error('Function "set" is not implemented');
     }
@@ -18,8 +21,11 @@ module.exports = class State {
     _del(){
         throw Error('Function "del" is not implemented');
     }
-    async get(...args) {
-        return this._get({rest: this.rest ? true : false, cache: this.options.cache }, ...args);
+    get(...args) {
+        return this._get(...args);
+    }
+    async fetch(...args) {
+        return this._fetch({rest: this.rest ? true : false}, ...args);
     }
     async set(...args) {
         return this._set({rest: this.rest ? true : false }, ...args);
@@ -27,10 +33,10 @@ module.exports = class State {
     async update(...args) {
         return this.set(...args);
     }
-    async del(...args) {
+    del(...args) {
         return this._del(...args)
     }
-    async size() {
+    size() {
         return this._size();
     }
 }
