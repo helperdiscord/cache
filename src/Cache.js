@@ -3,6 +3,7 @@ const Channels = require('./structs/Channels');
 const Guilds = require('./structs/Guilds');
 const Roles = require('./structs/Roles');
 const Members = require('./structs/Members');
+const Users = require('./structs/Users');
 module.exports = class Cache {
     constructor(url, options) {
         this.con = new Client();
@@ -10,7 +11,8 @@ module.exports = class Cache {
         this.channels = new Channels(this, { cache: options?.cache, rest: options?.rest });
         this.guilds = new Guilds(this, { cache: options?.cache, rest: options?.rest });
         this.roles = new Roles(this, { cache: options?.cache, rest: options?.rest });
-        this.members = new Members(this, { cache: options?.cache, rest: options?.rest })
+        this.members = new Members(this, { cache: options?.cache, rest: options?.rest });
+        this.users = new Users(this, { cache: options?.cache, rest: options?.rest });
     }
     query(q, values = []) {
         return this.con.querySync(q, values);

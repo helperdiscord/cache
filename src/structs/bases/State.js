@@ -18,25 +18,31 @@ module.exports = class State {
     _size() {
         throw Error('Function "size" is not implemented');
     }
-    _del(){
+    _del() {
         throw Error('Function "del" is not implemented');
+    }
+    _getAll() {
+        throw Error('Function "getAll" is not implemented');
     }
     get(...args) {
         return this._get(...args);
     }
     async fetch(...args) {
-        return this._fetch({rest: this.rest ? true : false}, ...args);
+        return this._fetch({ rest: this.rest ? true : false }, ...args);
     }
     async set(...args) {
-        return this._set({rest: this.rest ? true : false }, ...args);
+        return this._set({ rest: this.rest ? true : false }, ...args);
     }
     async update(...args) {
         return this.set(...args);
     }
     del(...args) {
-        return this._del(...args)
+        return this._del(...args);
     }
     size() {
         return this._size();
+    }
+    getAll(...args) {
+        return this.getAll(...args);
     }
 }
