@@ -23,7 +23,7 @@ module.exports = class Members extends State {
      * @return {*} 
      */
     async _fetch({ rest, cache }, id, guild_id) {
-        let c = (this.client.query('SELECT * FROM members WHERE user_id = $1', [id]))[0]
+        let c = (this.client.query('SELECT * FROM members WHERE user_id = $1 AND guild_id = $2', [id, guild_id]))[0]
         if (c) {
             return this.client.mergeObjects({ id: c.user_id, guild_id: c.guild_id }, c.data);
         }
