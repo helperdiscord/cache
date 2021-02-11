@@ -3,7 +3,7 @@
 <head>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<title>ClientOptions | @helperdiscord/cache</title>
+	<title>Rest | @helperdiscord/cache</title>
 	<meta name="description" content="Documentation for @helperdiscord/cache">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" href="../assets/css/main.css">
@@ -58,10 +58,10 @@
 					<a href="../modules/cache.html">Cache</a>
 				</li>
 				<li>
-					<a href="cache.clientoptions.html">ClientOptions</a>
+					<a href="cache.rest.html">Rest</a>
 				</li>
 			</ul>
-			<h1>Interface ClientOptions</h1>
+			<h1>Interface Rest</h1>
 		</div>
 	</div>
 </header>
@@ -71,10 +71,13 @@
 			<section class="tsd-panel tsd-comment">
 				<div class="tsd-comment tsd-typography">
 					<dl class="tsd-comment-tags">
+						<dt>description</dt>
+						<dd><p>a rest client for the discord api, you can use @spectacles/rest and @klasa/rest if you want a premade client</p>
+						</dd>
 						<dt>export</dt>
 						<dd></dd>
 						<dt>interface</dt>
-						<dd><p>ClientOptions</p>
+						<dd><p>Rest</p>
 						</dd>
 					</dl>
 				</div>
@@ -83,7 +86,7 @@
 				<h3>Hierarchy</h3>
 				<ul class="tsd-hierarchy">
 					<li>
-						<span class="target">ClientOptions</span>
+						<span class="target">Rest</span>
 					</li>
 				</ul>
 			</section>
@@ -92,56 +95,49 @@
 				<section class="tsd-panel tsd-index-panel">
 					<div class="tsd-index-content">
 						<section class="tsd-index-section ">
-							<h3>Properties</h3>
+							<h3>Methods</h3>
 							<ul class="tsd-index-list">
-								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="cache.clientoptions.html#cache" class="tsd-kind-icon">cache</a></li>
-								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="cache.clientoptions.html#rest" class="tsd-kind-icon">rest</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-interface"><a href="cache.rest.html#get" class="tsd-kind-icon">get</a></li>
 							</ul>
 						</section>
 					</div>
 				</section>
 			</section>
 			<section class="tsd-panel-group tsd-member-group ">
-				<h2>Properties</h2>
-				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
-					<a name="cache" class="tsd-anchor"></a>
-					<h3><span class="tsd-flag ts-flagOptional">Optional</span> cache</h3>
-					<div class="tsd-signature tsd-kind-icon">cache<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">boolean</span></div>
-					<aside class="tsd-sources">
-						<ul>
-							<li>Defined in <a href="https://github.com/helperdiscord/cache/blob/2a95ac7/src/Cache.ts#L39">Cache.ts:39</a></li>
-						</ul>
-					</aside>
-					<div class="tsd-comment tsd-typography">
-						<dl class="tsd-comment-tags">
-							<dt>description</dt>
-							<dd><p>whether you want to cache things that are fetched from the rest client</p>
-							</dd>
-							<dt>memberof</dt>
-							<dd><p>ClientOptions</p>
-							</dd>
-						</dl>
-					</div>
-				</section>
-				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
-					<a name="rest" class="tsd-anchor"></a>
-					<h3><span class="tsd-flag ts-flagOptional">Optional</span> rest</h3>
-					<div class="tsd-signature tsd-kind-icon">rest<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol"> | </span><a href="cache.rest.html" class="tsd-signature-type" data-tsd-kind="Interface">Rest</a></div>
-					<aside class="tsd-sources">
-						<ul>
-							<li>Defined in <a href="https://github.com/helperdiscord/cache/blob/2a95ac7/src/Cache.ts#L46">Cache.ts:46</a></li>
-						</ul>
-					</aside>
-					<div class="tsd-comment tsd-typography">
-						<dl class="tsd-comment-tags">
-							<dt>description</dt>
-							<dd><p>A rest client to allow you to fetch from the discord api</p>
-							</dd>
-							<dt>memberof</dt>
-							<dd><p>ClientOptions</p>
-							</dd>
-						</dl>
-					</div>
+				<h2>Methods</h2>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-interface">
+					<a name="get" class="tsd-anchor"></a>
+					<h3>get</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-interface">
+						<li class="tsd-signature tsd-kind-icon">get<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">...</span>args<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/helperdiscord/cache/blob/2a95ac7/src/Cache.ts#L23">Cache.ts:23</a></li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<dl class="tsd-comment-tags">
+									<dt>description</dt>
+									<dd><p>get function to the discord api which makes a &quot;get&quot; request</p>
+									</dd>
+									<dt>memberof</dt>
+									<dd><p>Rest</p>
+									</dd>
+								</dl>
+							</div>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5><span class="tsd-flag ts-flagRest">Rest</span> <span class="tsd-signature-symbol">...</span>args: <span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">[]</span></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">any</span></h4>
+							<p>{*}</p>
+						</li>
+					</ul>
 				</section>
 			</section>
 		</div>
@@ -179,24 +175,21 @@
 					<li class=" tsd-kind-class tsd-parent-kind-module">
 						<a href="../classes/cache.cache-1.html" class="tsd-kind-icon">Cache</a>
 					</li>
+					<li class=" tsd-kind-interface tsd-parent-kind-module">
+						<a href="cache.clientoptions.html" class="tsd-kind-icon">Client<wbr>Options</a>
+					</li>
 				</ul>
 				<ul class="current">
 					<li class="current tsd-kind-interface tsd-parent-kind-module">
-						<a href="cache.clientoptions.html" class="tsd-kind-icon">Client<wbr>Options</a>
+						<a href="cache.rest.html" class="tsd-kind-icon">Rest</a>
 						<ul>
-							<li class=" tsd-kind-property tsd-parent-kind-interface">
-								<a href="cache.clientoptions.html#cache" class="tsd-kind-icon">cache</a>
-							</li>
-							<li class=" tsd-kind-property tsd-parent-kind-interface">
-								<a href="cache.clientoptions.html#rest" class="tsd-kind-icon">rest</a>
+							<li class=" tsd-kind-method tsd-parent-kind-interface">
+								<a href="cache.rest.html#get" class="tsd-kind-icon">get</a>
 							</li>
 						</ul>
 					</li>
 				</ul>
 				<ul class="after-current">
-					<li class=" tsd-kind-interface tsd-parent-kind-module">
-						<a href="cache.rest.html" class="tsd-kind-icon">Rest</a>
-					</li>
 				</ul>
 			</nav>
 		</div>
@@ -208,7 +201,7 @@
 		<div class="tsd-legend-group">
 			<ul class="tsd-legend">
 				<li class="tsd-kind-interface"><span class="tsd-kind-icon">Interface</span></li>
-				<li class="tsd-kind-property tsd-parent-kind-interface"><span class="tsd-kind-icon">Property</span></li>
+				<li class="tsd-kind-method tsd-parent-kind-interface"><span class="tsd-kind-icon">Method</span></li>
 			</ul>
 			<ul class="tsd-legend">
 				<li class="tsd-kind-class"><span class="tsd-kind-icon">Class</span></li>

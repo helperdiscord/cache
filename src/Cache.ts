@@ -5,6 +5,24 @@ import { Guilds } from './structs/Guilds';
 import { Roles } from './structs/Roles';
 import { Members } from './structs/Members';
 import { Users } from './structs/Users';
+
+/**
+ *
+ * @description a rest client for the discord api, you can use @spectacles/rest and @klasa/rest if you want a premade client
+ * @export
+ * @interface Rest
+ */
+export interface Rest {
+    /**
+     *
+     * @description get function to the discord api which makes a "get" request
+     * @param {...any[]} args
+     * @return {*}  {*}
+     * @memberof Rest
+     */
+    get(...args: any[]): any;
+}
+
 /**
  *
  *
@@ -12,8 +30,20 @@ import { Users } from './structs/Users';
  * @interface ClientOptions
  */
 export interface ClientOptions {
+    /**
+     *
+     * @description whether you want to cache things that are fetched from the rest client
+     * @type {boolean}
+     * @memberof ClientOptions
+     */
     cache?: boolean;
-    rest?: any;
+    /**
+     *
+     * @description A rest client to allow you to fetch from the discord api
+     * @type {Rest}
+     * @memberof ClientOptions
+     */
+    rest?: Rest;
 }
 /**
  *
@@ -29,10 +59,40 @@ export class Cache {
      * @memberof Cache
      */
     public con: Client;
+    /**
+     *
+     * @description guild manager
+     * @type {Guilds}
+     * @memberof Cache
+     */
     public guilds: Guilds;
+    /**
+     *
+     * @description role manager
+     * @type {Roles}
+     * @memberof Cache
+     */
     public roles: Roles;
+    /**
+     *
+     * @description guild member manager
+     * @type {Members}
+     * @memberof Cache
+     */
     public members: Members;
+    /**
+     *
+     * @description User manager
+     * @type {Users}
+     * @memberof Cache
+     */
     public users: Users;
+    /**
+     *
+     * @description Channel manager
+     * @type {Channels}
+     * @memberof Cache
+     */
     public channels: Channels;
     /**
      * Creates an instance of Cache.
