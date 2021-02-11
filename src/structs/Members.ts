@@ -17,9 +17,10 @@ export class Members extends State {
      * @memberof Members
      */
     public get(id: Snowflake, guild_id: Snowflake): Member | null {
-        let c = (this.client.query('SELECT * FROM members WHERE user_id = $1 AND guild_id = $2', [id, guild_id])) as any[][0]
-        if (c) {
-            return this.client.mergeObjects<{ id: Snowflake, guild_id: Snowflake }, any>({ id: c.user_id, guild_id: c.guild_id }, c.data) as Member;
+        let c = (this.client.query('SELECT * FROM members WHERE user_id = $1 AND guild_id = $2', [id, guild_id])) as { user_id: Snowflake, guild_id: Snowflake, data: { roles: Snowflake[], joined_at: string } }[];
+        //@ts-ignore
+        if (c.length > 0) {
+            return { id: id, guild_id: guild_id, roles: c[0].data.roles, joined_at: c[0].data.joined_at } as Member;
         }
         return null;
     }
@@ -34,9 +35,10 @@ export class Members extends State {
     public async fetch(id: Snowflake, guild_id: Snowflake): Promise<Member | null> {
         const rest = this.rest ? true : false;
         const cache = this.cache;
-        let c = (this.client.query('SELECT * FROM members WHERE user_id = $1 AND guild_id = $2', [id, guild_id])) as any[][0]
-        if (c) {
-            return this.client.mergeObjects<{ id: Snowflake, guild_id: Snowflake }, any>({ id: c.user_id, guild_id: c.guild_id }, c.data) as Member;
+        let c = (this.client.query('SELECT * FROM members WHERE user_id = $1 AND guild_id = $2', [id, guild_id])) as { user_id: Snowflake, guild_id: Snowflake, data: { roles: Snowflake[], joined_at: string } }[]
+        if (c.length > 0) {
+            console.log(c)
+            return { id: id, guild_id: guild_id, roles: c[0].data.roles, joined_at: c[0].data.joined_at } as Member;
         }
         if (rest) {
             let channel = await this.rest.get(`/guilds/${guild_id}/members/${id}`);
