@@ -1,9 +1,13 @@
 {
   "name": "@helperdiscord/cache",
-  "version": "1.1.0",
+  "version": "2.0.0",
   "description": "",
-  "main": "src/index.js",  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+  "main": "dist/index.js",
+  "scripts": {
+    "clean": "rimraf dist/*",
+    "build": "npm run clean && tsup src/index.ts --format esm,cjs,iife --dts --minify",
+    "prepare": "npm run build",
+    "doc": "typedoc src/index.ts src/Cache.ts src/structs/Users.ts src/structs/Roles.ts src/structs/Members.ts src/structs/Guilds.ts src/structs/Channels.ts"
   },
   "repository": {
     "type": "git",
@@ -18,5 +22,10 @@
   "homepage": "https://github.com/helperdiscord/cache#readme",
   "dependencies": {
     "pg-native": "^3.0.0"
+  },
+  "devDependencies": {
+    "@helperdiscord/types": "^1.0.0",
+    "rimraf": "^3.0.2",
+    "tsup": "^3.12.1"
   }
 }
