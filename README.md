@@ -5,8 +5,14 @@ This is a caching library for discord based on the pg-native library.
 ```ts
 const { Cache } = require('@helperdiscord/cache');
 const { REST } = require('@klasa/rest'); // a rest client you can use 
+const { Client } = require('discord.js'); // djs rest
 
+/* One possible option */
 const rest = new REST({ version: 8 });
+rest.token = process.env.DISCORD_TOKEN;
+
+/* Another possible option */
+const rest = new Client();
 rest.token = process.env.DISCORD_TOKEN;
 
 const cache = new Cache(process.env.POSTGRES_URI, { cache: true, rest: rest });
