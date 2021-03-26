@@ -1,11 +1,12 @@
 {
   "name": "@helperdiscord/cache",
-  "version": "2.1.0",
+  "version": "2.1.4",
   "description": "",
   "main": "dist/index.js",
   "scripts": {
     "clean": "rimraf dist/*",
     "build": "npm run clean && tsup src/index.ts --format esm,cjs,iife --dts --minify",
+    "test": "npm run clean && tsup src/index.ts --format esm,cjs,iife --dts && node test.mjs",
     "prepare": "npm run build",
     "doc": "typedoc src/index.ts src/Cache.ts src/structs/Users.ts src/structs/Roles.ts src/structs/Members.ts src/structs/Guilds.ts src/structs/Channels.ts",
     "release": "npm run build && npm run doc"

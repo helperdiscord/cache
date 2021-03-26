@@ -16,7 +16,7 @@ export class Roles extends State {
      * @memberof Roles
      */
     public get(id: Snowflake): Role | null {
-        let c = (this.client.query('SELECT * FROM roles WHERE role_id = $1', [id])) as any[][0]
+        let c = this.client.query<{ role_id: Snowflake, guild_id: Snowflake, data: any }>('SELECT * FROM roles WHERE role_id = $1', [id]);
         if (c) {
             return this.client.mergeObjects<{ id: Snowflake, guild_id: Snowflake }, any>({ id: c.role_id, guild_id: c.guild_id }, c.data) as Role;
         }
@@ -33,9 +33,9 @@ export class Roles extends State {
     public async fetch(id: Snowflake, guild_id: Snowflake): Promise<Role | Role[] | null> {
         const rest = this.rest ? true : false;
         const cache = this.cache;
-        let c = (this.client.query('SELECT * FROM roles WHERE role_id = $1', [id])) as any[][0]
+        let c = this.get(id);
         if (c) {
-            return this.client.mergeObjects<{ id: Snowflake, guild_id: Snowflake }, any>({ id: c.role_id, guild_id: c.guild_id }, c.data) as Role;
+            return c;
         }
         if (rest) {
             let channels: Role[] = await this.rest.get(`/guilds/${guild_id}/roles`);
@@ -103,7 +103,7 @@ export class Roles extends State {
      */
     public size(): number {
         //@ts-ignore
-        let amount = (this.client.query('SELECT COUNT(*) FROM roles'))[0]?.count;
+        let amount = (this.client.query('SELECT COUNT(*) FROM roles'))?.count;
         return amount ?? 0;
     }
     /**
@@ -113,7 +113,7 @@ export class Roles extends State {
      * @memberof Roles
      */
     public getAll(): Role[] {
-        const channels = this.client.query('SELECT * FROM channels') as any[];
+        const channels = this.client.con.querySync('SELECT * FROM channels') as any[];
         let result: Role[] = [];
         for (const channel of channels) {
             result.push(this.client.mergeObjects<{ id: Snowflake, guild_id: Snowflake }, any>({ id: channel.role_id, guild_id: channel.guild_id }, channel.data) as Role);

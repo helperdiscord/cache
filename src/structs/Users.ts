@@ -16,7 +16,7 @@ export class Users extends State {
      * @memberof Users
      */
     public get(id: Snowflake): User | null {
-        let c = (this.client.query('SELECT * FROM users WHERE user_id = $1', [id])) as any[][0]
+        let c = this.client.query<{ user_id: Snowflake, data: any }>('SELECT * FROM users WHERE user_id = $1', [id]);
         if (c) {
             return this.client.mergeObjects<{ id: Snowflake }, any>({ id: c.user_id }, c.data) as User;
         }
@@ -32,9 +32,9 @@ export class Users extends State {
     public async fetch(id: Snowflake): Promise<User | null> {
         const rest = this.rest ? true : false;
         const cache = this.cache;
-        let c = (this.client.query('SELECT * FROM users WHERE user_id = $1', [id])) as any[][0]
+        let c = this.get(id);
         if (c) {
-            return this.client.mergeObjects<{ id: Snowflake }, any>({ id: c.user_id }, c.data) as User;
+            return c;
         }
         if (rest) {
             let channel = await this.rest.get(`/users/${id}`);
@@ -42,7 +42,7 @@ export class Users extends State {
                 let newObj = this.client.deepClone(channel) as User;
                 //@ts-ignore
                 delete newObj.id
-                this.client.query('INSERT INTO users VALUES($1, $2) ON CONFLICT("user_id") DO UPDATE SET "data" = EXCLUDED.data;', [id, channel.JSON.stringify(newObj)])
+                this.client.query('INSERT INTO users VALUES($1, $2) ON CONFLICT("user_id") DO UPDATE SET "data" = EXCLUDED.data;', [id, JSON.stringify(newObj)])
             }
             return channel;
         }
@@ -101,7 +101,7 @@ export class Users extends State {
      * @memberof Users
      */
     public getAll(): User[] {
-        const channels = this.client.query('SELECT * FROM users') as any[];
+        const channels = this.client.con.querySync('SELECT * FROM users') as any[];
         let result: User[] = [];
         for (const channel of channels) {
             result.push(this.client.mergeObjects<{ id: Snowflake }, any>({ id: channel.id }, channel.data) as User);

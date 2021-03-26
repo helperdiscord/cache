@@ -118,8 +118,9 @@ export class Cache {
      * @return {*}  {T}
      * @memberof Cache
      */
-    public query<T>(q: string, values: string[] = []): T {
-        return this.con.querySync(q, values);
+    public query<T>(q: string, values: string[] = []): T | null {
+        const query = this.con.querySync(q, values);
+        return query.length > 0 ? query[0] : null;
     }
     /**
      *

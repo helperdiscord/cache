@@ -16,7 +16,7 @@ export class Channels extends State {
      * @memberof Channels
      */
     public get(id: Snowflake): Channel | null {
-        let c = (this.client.query('SELECT * FROM channels WHERE channel_id = $1', [id])) as any[][0]
+        let c = this.client.query<{ channel_id: Snowflake, guild_id: Snowflake, data: any }>('SELECT * FROM channels WHERE channel_id = $1', [id])
         if (c) {
             return this.client.mergeObjects<{ id: Snowflake, guild_id: Snowflake }, any>({ id: c.channel_id, guild_id: c.guild_id }, c.data) as Channel;
         }
@@ -32,9 +32,9 @@ export class Channels extends State {
     public async fetch(id: Snowflake): Promise<Channel | null> {
         const rest = this.rest ? true : false;
         const cache = this.cache;
-        let c = (this.client.query('SELECT * FROM channels WHERE channel_id = $1', [id])) as any[][0]
+        let c = this.get(id);
         if (c) {
-            return this.client.mergeObjects<{ id: Snowflake, guild_id: Snowflake }, any>({ id: c.channel_id, guild_id: c.guild_id }, c.data) as Channel;
+            return c;
         }
         if (rest) {
             let channel: Channel = await this.rest.get(`/channels/${id}`);
@@ -96,7 +96,7 @@ export class Channels extends State {
      */
     public size(): number {
         //@ts-ignore
-        let amount = (this.client.query('SELECT COUNT(*) FROM channels'))[0]?.count;
+        let amount = (this.client.query('SELECT COUNT(*) FROM channels'))?.count;
         return amount ?? 0;
     }
     /**
@@ -106,7 +106,7 @@ export class Channels extends State {
      * @memberof Channels
      */
     public getAll(): Channel[] {
-        const channels = this.client.query('SELECT * FROM channels') as any[];
+        const channels = this.client.con.querySync('SELECT * FROM channels') as any[];
         let result: Channel[] = [];
         for (const channel of channels) {
             result.push(this.client.mergeObjects<{ id: Snowflake, guild_id: Snowflake }, any>({ id: channel.channel_id, guild_id: channel.guild_id }, channel.data) as Channel);

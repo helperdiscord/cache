@@ -16,7 +16,7 @@ export class Guilds extends State {
      * @memberof Guilds
      */
     public get(id: Snowflake): Guild | null {
-        let g = (this.client.query('SELECT * FROM guilds WHERE guild_id = $1', [id])) as any[][0]
+        let g = this.client.query<{ guild_id: Snowflake, data: any }>('SELECT * FROM guilds WHERE guild_id = $1', [id]);
         if (g) {
             return this.client.mergeObjects<{ id: Snowflake }, any>({ id: g.guild_id }, g.data) as Guild;
         }
@@ -32,9 +32,9 @@ export class Guilds extends State {
     public async fetch(id: Snowflake): Promise<Guild | null> {
         const rest = this.rest ? true : false;
         const cache = this.cache;
-        let g = (this.client.query('SELECT * FROM guilds WHERE guild_id = $1', [id])) as any[][0]
+        let g = this.get(id);
         if (g) {
-            return this.client.mergeObjects<{ id: Snowflake }, any>({ id: g.guild_id }, g.data) as Guild;
+            return g
         }
         if (rest) {
             let channel = await this.rest.get(`/guilds/${id}`);
@@ -90,7 +90,7 @@ export class Guilds extends State {
      */
     public size(): number {
         //@ts-ignore
-        let amount = (this.client.query('SELECT COUNT(*) FROM guilds'))[0]?.count;
+        let amount = (this.client.query('SELECT COUNT(*) FROM guilds'))?.count;
         return amount ?? 0;
     }
     /**
@@ -100,10 +100,10 @@ export class Guilds extends State {
      * @memberof Guilds
      */
     public getAll(): Guild[] {
-        const guilds = this.client.query('SELECT * FROM guilds') as any[];
+        const guilds = this.client.con.querySync('SELECT * FROM guilds') as any[];
         let result: Guild[] = [];
         for (const channel of guilds) {
-            result.push(this.client.mergeObjects<{ id: Snowflake }, any>({ id: channel.id }, channel.data) as Guild);
+            result.push(this.client.mergeObjects<{ id: Snowflake }, any>({ id: channel.guild_id }, channel.data) as Guild);
         }
         return result;
     }
