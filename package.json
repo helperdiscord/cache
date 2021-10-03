@@ -17,7 +17,7 @@
     "build": "npm run clean && tsup src/index.ts --format esm,cjs --dts --minify",
     "test": "npm run clean && tsup src/index.ts --format esm,cjs --dts && node test.mjs",
     "prepare": "npm run build",
-    "doc": "typedoc src/index.ts src/Cache.ts src/structs/Users.ts src/structs/Roles.ts src/structs/Members.ts src/structs/Guilds.ts src/structs/Channels.ts",
+    "doc": "npx ts-docs src/index.ts",
     "release": "npm run build && npm run doc"
   },
   "repository": {
@@ -36,6 +36,8 @@
   },
   "devDependencies": {
     "@helperdiscord/types": "^1.0.0",
+    "@ts-docs/default-docs-structure": "^0.1.17",
+    "@ts-docs/ts-docs": "^0.1.0",
     "rimraf": "^3.0.2",
     "tsup": "^3.12.1"
   }

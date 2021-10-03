@@ -4,14 +4,14 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <title> cache</title>
+  <title>bases |  cache</title>
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
     integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
     <link id="highlightTheme" rel="stylesheet" crossorigin="anonymous" referrerpolicy="no-referrer" />
   
-    <link href="assets/css/index.css" type="text/css" rel="stylesheet">
-    <script src="assets/js/index.js"></script>
-    <script>window.depth="";window.ab=false;</script>
+    <link href="../../assets/css/index.css" type="text/css" rel="stylesheet">
+    <script src="../../assets/js/index.js"></script>
+    <script>window.depth="../../";window.ab=false;</script>
     
 </head>
 
@@ -44,20 +44,10 @@
     <div class="row">
       <div class="col-lg-auto sidebar" id="sidebar">
         
-    <h1 class="lib-name text-center"><a href="index.html">cache</a></h1>
+    <h1 class="lib-name text-center"><a href="../../index.html">cache</a></h1>
     
-    <p class="current-thing text-center">module <span class="module">cache</span></p>
+    <p class="current-thing text-center">module <span class="module">bases</span></p>
     <div class="sidebar-members">
-    
-        <div class="sidebar-member">
-        <div class="collapsible-trigger">
-        <span class="collapsible-arrow open"></span>
-        <span class="sidebar-category">Modules</span>
-        </div>
-        <div class="collapsible-body open"> 
-        <span class="sidebar-category-member"><a href="m.structs/index.html">structs</a></span>
-        </div>
-        </div>
     
         <div class="sidebar-member">
         <div class="collapsible-trigger">
@@ -65,7 +55,7 @@
         <span class="sidebar-category">Classes</span>
         </div>
         <div class="collapsible-body open"> 
-        <span class="sidebar-category-member"><a href="class/Cache.html">Cache</a></span>
+        <span class="sidebar-category-member"><a href="class/default.html">default</a></span>
         </div>
         </div>
     
@@ -75,7 +65,7 @@
         <span class="sidebar-category">Interfaces</span>
         </div>
         <div class="collapsible-body open"> 
-        <span class="sidebar-category-member"><a href="interface/Rest.html">Rest</a></span><span class="sidebar-category-member"><a href="interface/ClientOptions.html">ClientOptions</a></span>
+        <span class="sidebar-category-member"><a href="interface/StateOptions.html">StateOptions</a></span>
         </div>
         </div>
     
@@ -157,13 +147,16 @@
         
             </div>
         </div>        <div id="content-main" class="d-none">
+          <div class="path">
+            <a href="../../index.html" class="path-member">index</a> / <a href="../index.html" class="path-member">structs</a> / <a class="path-member" href="">bases</a>
+          </div>
           
 
 <div>
     <h1>
     Module
-    <span class="referenceLink module">cache</span>
-    <a href=https://github.com/helperdiscord/cache/tree/master/src>
+    <span class="referenceLink module">bases</span>
+    <a href=https://github.com/helperdiscord/cache/tree/master/src/structs/bases>
 <span class="float-end sourceCode">
 <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-code-slash" viewBox="0 0 16 16">
   <path d="M10.478 1.647a.5.5 0 1 0-.956-.294l-4 13a.5.5 0 0 0 .956.294l4-13zM4.854 4.146a.5.5 0 0 1 0 .708L1.707 8l3.147 3.146a.5.5 0 0 1-.708.708l-3.5-3.5a.5.5 0 0 1 0-.708l3.5-3.5a.5.5 0 0 1 .708 0zm6.292 0a.5.5 0 0 0 0 .708L14.293 8l-3.147 3.146a.5.5 0 0 0 .708.708l3.5-3.5a.5.5 0 0 0 0-.708l-3.5-3.5a.5.5 0 0 0-.708 0z"></path>
@@ -171,33 +164,8 @@
 </span></a>
     </h1>
 
-    <h1 id="helperdiscordcache" class="section-header">@helperdiscord/cache</h1><p>This is a caching library for discord based on the pg-native library.</p>
-<pre><code class="hljs"><span class="hljs-keyword">const</span> { <span class="hljs-title class_">Cache</span> } = <span class="hljs-built_in">require</span>(<span class="hljs-string">&#x27;@helperdiscord/cache&#x27;</span>);
-<span class="hljs-keyword">const</span> { <span class="hljs-variable constant_">REST</span> } = <span class="hljs-built_in">require</span>(<span class="hljs-string">&#x27;@klasa/rest&#x27;</span>); <span class="hljs-comment">// a rest client you can use </span>
-<span class="hljs-keyword">const</span> { <span class="hljs-title class_">Client</span> } = <span class="hljs-built_in">require</span>(<span class="hljs-string">&#x27;discord.js&#x27;</span>); <span class="hljs-comment">// djs rest</span>
-
-<span class="hljs-comment">/* One possible option */</span>
-<span class="hljs-keyword">const</span> rest = <span class="hljs-keyword">new</span> <span class="hljs-title function_">REST</span>({ <span class="hljs-attr">version</span>: <span class="hljs-number">8</span> });
-rest.<span class="hljs-property">token</span> = process.<span class="hljs-property">env</span>.<span class="hljs-property">DISCORD_TOKEN</span>;
-
-<span class="hljs-comment">/* Another possible option */</span>
-<span class="hljs-keyword">const</span> rest = <span class="hljs-keyword">new</span> <span class="hljs-title class_">Client</span>();
-rest.<span class="hljs-property">token</span> = process.<span class="hljs-property">env</span>.<span class="hljs-property">DISCORD_TOKEN</span>;
-
-<span class="hljs-keyword">const</span> cache = <span class="hljs-keyword">new</span> <span class="hljs-title class_">Cache</span>(process.<span class="hljs-property">env</span>.<span class="hljs-property">POSTGRES_URI</span>, { <span class="hljs-attr">cache</span>: <span class="hljs-literal">true</span>, <span class="hljs-attr">rest</span>: rest });
-
-<span class="hljs-keyword">const</span> doge = cache.<span class="hljs-property">users</span>.<span class="hljs-title function_">get</span>(<span class="hljs-string">&#x27;395782478192836608&#x27;</span>); <span class="hljs-comment">// will return a user object (from cache) or null</span>
-
-<span class="hljs-keyword">const</span> forceDoge = <span class="hljs-keyword">await</span> cache.<span class="hljs-property">users</span>.<span class="hljs-title function_">fetch</span>(<span class="hljs-string">&#x27;395782478192836608&#x27;</span>); <span class="hljs-comment">// will return a user object or null</span>
-
-cache.<span class="hljs-property">users</span>.<span class="hljs-title function_">del</span>(<span class="hljs-string">&#x27;395782478192836608&#x27;</span>); <span class="hljs-comment">// will remove the user with the id &quot;395782478192836608&quot; from the user cache</span>
-</code></pre><p>Note: You need libpq bindings for this to work</p>
-
 
     
-    
-    <h2>Exports</h2>
-    <div><span><span class="c-tooltip"><a class="reference-link object" href="class/Cache.html">Cache</a><span class="c-tooltip-content"><span class="keyword">class</span> <span class="item-name object">Cache</span><span style="display:block" class="monospace fw-bold"><span class="item-name object">Cache</span></span></span></span></span></div><div><span><span class="c-tooltip"><a class="reference-link object" href="class/Cache.html">Cache</a><span class="c-tooltip-content"><span class="keyword">class</span> <span class="item-name object">Cache</span><span style="display:block" class="monospace fw-bold"><span class="item-name object">Cache</span></span></span></span></span></div>
     
     
     
